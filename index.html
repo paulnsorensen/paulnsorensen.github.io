@@ -3,21 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>🧀</title>
+  <title>Paul Sorensen 🧀</title>
   <link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="description" content="Paul Sorensen — projects">
+  <meta name="theme-color" content="#0f1410">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Paul Sorensen">
+  <meta property="og:description" content="Paul Sorensen — projects">
+  <meta property="og:url" content="https://cheeselord.dev/">
+  <meta property="og:image" content="https://cheeselord.dev/cheeselord-still.jpg">
   <style>
-    :root { --fg: #f5f5f5; --bg: #0e1411; --muted: #999; }
+    :root {
+      --bg: #0f1410;      /* sampled from cheeselord.gif edge pixels */
+      --fg: #ede5d3;
+      --muted: #8f8974;
+      --flame: #f0a13c;
+    }
     html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); }
     body {
       min-height: 100dvh;
       display: grid;
       place-items: center;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
       padding: 2rem 1rem;
       box-sizing: border-box;
     }
+    ::selection { background: rgba(240, 161, 60, 0.25); }
     main {
       display: flex;
       align-items: center;
@@ -30,6 +42,9 @@
       height: auto;
       display: block;
       user-select: none;
+      /* feather the gif's edges into the page so the frame boundary disappears */
+      -webkit-mask-image: radial-gradient(ellipse closest-side, #000 68%, transparent 100%);
+      mask-image: radial-gradient(ellipse closest-side, #000 68%, transparent 100%);
     }
     ul {
       list-style: none;
@@ -42,6 +57,7 @@
     }
     li::before {
       content: "🧀";
+      content: "🧀" / ""; /* alt text: decorative, silent for screen readers */
       margin-right: 0.6rem;
       font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
     }
@@ -50,16 +66,35 @@
       text-decoration: none;
       border-bottom: 1px solid var(--muted);
       padding-bottom: 2px;
-      transition: border-color 0.15s, opacity 0.15s;
+      transition: border-color 0.15s, color 0.15s, opacity 0.15s;
       opacity: 0.85;
     }
-    a:hover, a:focus { border-color: currentColor; opacity: 1; }
+    a:hover, a:focus-visible { border-color: var(--flame); color: var(--flame); opacity: 1; }
+    a:focus-visible { outline: 2px solid var(--flame); outline-offset: 3px; border-radius: 2px; }
     .desc { color: var(--muted); margin-left: 0.4rem; font-size: 0.85em; }
+    .signature {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.1rem;
+      margin: 0;
+      font-family: "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--fg);
+      opacity: 0.14;
+      transform: rotate(-2.5deg);
+      user-select: none;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
   <main>
-    <img class="portrait" src="cheeselord.gif" alt="Cheese Lord">
+    <video class="portrait" width="320" height="320" autoplay muted loop playsinline
+           poster="cheeselord-still.jpg" role="img" aria-label="Cheese Lord">
+      <source src="cheeselord.webm" type="video/webm">
+      <source src="cheeselord.mp4" type="video/mp4">
+    </video>
     <ul>
       <li><a href="/easy-cheese">easy-cheese</a><span class="desc">— cheese your code</span></li>
       <li><a href="/hallouminate">hallouminate</a><span class="desc">— grounding CLI</span></li>
@@ -68,5 +103,13 @@
       <li><a href="https://github.com/paulnsorensen/dotfiles">dotfiles</a><span class="desc">— the whole rig</span></li>
     </ul>
   </main>
+  <h1 class="signature">Paul Sorensen</h1>
+  <script>
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const v = document.querySelector("video");
+      v.removeAttribute("autoplay");
+      v.pause();
+    }
+  </script>
 </body>
 </html>
