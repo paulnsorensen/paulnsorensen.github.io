@@ -30,11 +30,24 @@
         <a href="https://github.com/paulnsorensen/dotfiles"><strong>dotfiles</strong> <span>the whole rig</span> <i aria-hidden="true">→</i></a>
       </nav>
     </div>
-    <div class="ember-box"><img class="ember" src="cheeselord.gif" alt="The Cheese Lord: a block of cheese burning atop a runic sigil"></div>
+    <div class="ember-box">
+      <video class="ember" width="320" height="320" autoplay muted loop playsinline
+             poster="cheeselord-still.jpg" role="img" aria-label="The Cheese Lord: a block of cheese burning atop a runic sigil">
+        <source src="cheeselord.webm" type="video/webm">
+        <source src="cheeselord.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
 </main>
 <footer>
   <div class="wrap"><span>milk in, wheels out 🧀</span></div>
 </footer>
+<script>
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const v = document.querySelector("video");
+    v.removeAttribute("autoplay");
+    v.pause();
+  }
+</script>
 </body>
 </html>
