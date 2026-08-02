@@ -92,15 +92,13 @@ h1 em { font-style: normal; color: var(--gold); }
 footer { border-block-start: 1px solid var(--hairline); margin-block-start: 4rem; }
 footer .wrap { padding-block: 1.1rem; font-size: 0.75rem; color: var(--dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 footer b { color: var(--gold); font-weight: 400; }
-/* the signature: Fraunces stands in for cursive so the one-font-pair invariant holds */
+/* the signature: Zapfino pre-rendered to an image asset so the one-font-pair invariant holds */
 .signature {
-  font-family: Fraunces, Georgia, serif;
-  font-style: italic;
-  font-variation-settings: "SOFT" 100, "WONK" 1;
-  font-size: 0.95rem;
-  color: var(--bone);
-  opacity: 0.25;
-  transform: rotate(-2deg);
+  block-size: 2.1rem;
+  inline-size: auto;
+  margin-block: -0.4rem;
+  opacity: 0.36;
+  transform: rotate(-1deg);
   user-select: none;
 }
 
