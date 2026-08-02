@@ -38,7 +38,7 @@ body {
 
 header { border-block-end: 1px solid var(--hairline); }
 header .wrap { display: flex; align-items: baseline; justify-content: space-between; padding-block: 1.1rem; font-size: 0.82rem; }
-.brand { color: var(--bone); letter-spacing: 0.02em; }
+.brand { color: var(--bone); letter-spacing: 0.02em; text-decoration: none; }
 .brand b { color: var(--gold); font-weight: 400; }
 
 main { flex: 1; }
