@@ -1,76 +1,16 @@
-@font-face { font-family: Fraunces; font-style: normal; font-weight: 100 900; font-display: swap; src: url("../assets/fonts/fraunces-latin-variable.woff2") format("woff2"); }
-@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/ibm-plex-mono-latin.woff2") format("woff2"); }
-@media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; } }
+/* cheeselord.dev — what is unique to this page, and nothing else.
+   The shell, the fonts, the cellar flavor, and the header all come from
+   @cheeselord/design, vendored under styles/vendor/ by scripts/sync-design.sh
+   and loaded ahead of this file. Everything that used to be copied here — the
+   token block, the fleck field, the type scale, the cellar listing — now moves
+   when the package moves. */
 
-@property --cellar { syntax: "<color>"; inherits: true; initial-value: #0b0e0c; }
-@property --panel { syntax: "<color>"; inherits: true; initial-value: #10140f; }
-@property --bone { syntax: "<color>"; inherits: true; initial-value: #e9e2d0; }
-@property --dim { syntax: "<color>"; inherits: true; initial-value: #8d8878; }
-@property --gold { syntax: "<color>"; inherits: true; initial-value: #d9a13b; }
-
-:root {
-  color-scheme: dark;
-  --cellar: oklch(16.9% 0.007 156);
-  --panel: oklch(19.5% 0.01 140);
-  --bone: oklch(91% 0.021 95);
-  --dim: oklch(61% 0.02 95);
-  --gold: oklch(73.5% 0.13 78);
-  --hairline: oklch(from var(--bone) l c h / 13%);
-}
-* { box-sizing: border-box; margin: 0; }
-body {
-  min-block-size: 100vh;
-  min-block-size: 100dvh;
-  display: flex;
-  flex-direction: column;
-  background:
-    radial-gradient(circle 2px at 18% 22%, oklch(from var(--gold) l c h / 22%) 99%, transparent),
-    radial-gradient(circle 1.5px at 82% 12%, oklch(from var(--bone) l c h / 10%) 99%, transparent),
-    radial-gradient(circle 1.5px at 68% 78%, oklch(from var(--bone) l c h / 8%) 99%, transparent),
-    radial-gradient(circle 2px at 8% 82%, oklch(from var(--bone) l c h / 7%) 99%, transparent),
-    radial-gradient(circle 1.5px at 92% 55%, oklch(from var(--gold) l c h / 12%) 99%, transparent),
-    radial-gradient(ellipse 60rem 40rem at 50% -10%, oklch(29% 0.035 157 / 55%), transparent),
-    var(--cellar);
-  color: var(--bone);
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-}
-.wrap { width: min(68rem, calc(100% - 3rem)); margin-inline: auto; }
-
-header { border-block-end: 1px solid var(--hairline); }
-header .wrap { display: flex; align-items: baseline; justify-content: space-between; padding-block: 1.1rem; font-size: 0.82rem; }
-.brand { color: var(--bone); letter-spacing: 0.02em; text-decoration: none; }
-.brand b { color: var(--gold); font-weight: 400; }
-
+/* the page is a column so the footer sits at the bottom of a short viewport */
+body { display: flex; flex-direction: column; }
 main { flex: 1; }
-main .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3rem; align-items: center; padding-block: 5.5rem 3rem; }
 
-.eyebrow { font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
-.eyebrow::before { content: "● "; color: var(--gold); }
-h1 {
-  margin-block: 1.2rem 1.4rem;
-  font-family: Fraunces, Georgia, serif;
-  font-variation-settings: "SOFT" 0, "WONK" 1;
-  font-weight: 560;
-  font-size: clamp(3.4rem, 7.5vw, 5.6rem);
-  line-height: 0.95;
-  letter-spacing: -0.045em;
-  text-wrap: balance;
-}
-h1 em { font-style: normal; color: var(--gold); }
-.lede { font-size: 0.95rem; line-height: 1.7; color: var(--dim); max-width: 34rem; text-wrap: pretty; }
-
-.cellar { margin-block-start: 3.2rem; border: 1px solid var(--hairline); }
-.cellar-head { padding: 0.55rem 1rem; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); border-block-end: 1px solid var(--hairline); }
-.cellar a { display: grid; grid-template-columns: 11rem 1fr auto; gap: 1rem; align-items: baseline; padding: 0.85rem 1rem; color: var(--bone); text-decoration: none; font-size: 0.88rem; border-block-end: 1px solid var(--hairline); }
-.cellar a:last-child { border-block-end: 0; }
-.cellar a span { color: var(--dim); font-size: 0.82rem; }
-.cellar a i { font-style: normal; color: var(--dim); transition: transform 0.15s; }
-.cellar a:hover { background: var(--panel); }
-.cellar a:hover i { color: var(--gold); transform: translateX(3px); }
-.cellar a:hover strong { color: var(--gold); }
-.cellar strong { font-weight: 400; }
-
-/* the hero artifact: the Cheese Lord burning on his sigil, feathered into the cellar dark */
+/* the hero artifact: the Cheese Lord burning on his sigil, feathered into the
+   cellar dark. Stands where the package's dot-matrix wheel would be. */
 .ember-box { display: grid; place-items: center; }
 .ember {
   inline-size: min(24rem, 90%);
@@ -81,18 +21,9 @@ h1 em { font-style: normal; color: var(--gold); }
   mask: radial-gradient(ellipse closest-side, #000 62%, transparent 97%);
   filter: drop-shadow(0 0 3.5rem oklch(from var(--gold) l c h / 18%));
 }
-@media (max-width: 56rem) {
-  main .wrap { grid-template-columns: 1fr; padding-block-start: 3.5rem; }
-  .ember-box { order: -1; }
-  .ember { inline-size: min(15rem, 70%); }
-  .cellar a { grid-template-columns: 1fr auto; }
-  .cellar a span { grid-column: 1 / -1; }
-}
 
-footer { border-block-start: 1px solid var(--hairline); margin-block-start: 4rem; }
-footer .wrap { padding-block: 1.1rem; font-size: 0.75rem; color: var(--dim); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-footer b { color: var(--gold); font-weight: 400; }
-/* the signature: Zapfino pre-rendered to an image asset so the one-font-pair invariant holds */
+/* the signature: Zapfino pre-rendered to an image asset so the one-font-pair
+   invariant holds without shipping a third face */
 .signature {
   block-size: 2.1rem;
   inline-size: auto;
@@ -102,7 +33,7 @@ footer b { color: var(--gold); font-weight: 400; }
   user-select: none;
 }
 
-@supports (color: contrast-color(red)) {
-  ::selection { background: var(--gold); color: contrast-color(var(--gold)); }
+@media (max-width: 56rem) {
+  .ember-box { order: -1; }
+  .ember { inline-size: min(15rem, 70%); }
 }
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }

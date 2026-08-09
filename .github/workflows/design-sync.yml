@@ -1,0 +1,85 @@
+# This site is served by GitHub Pages straight from the branch, so
+# @cheeselord/design's stylesheets are committed under styles/vendor/ rather
+# than installed. Two jobs keep that copy honest: `verify` fails a pull request
+# whose vendored tree does not match the pinned version, and `update` opens a
+# pull request when a newer version is published. Without them, the homepage
+# silently forks from the design system — which is how its neutral ramp drifted
+# to a hue the package had stopped producing.
+name: design-sync
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: vendored copy matches the pin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+      - name: Re-vendor at the pinned version
+        run: ./scripts/sync-design.sh
+      # --porcelain, not `git diff`: a stylesheet the package newly ships lands
+      # untracked, and `git diff` does not see untracked files. That hole makes
+      # the check pass on exactly the drift it exists to catch.
+      - name: Fail if the working tree moved
+        run: |
+          changes=$(git status --porcelain)
+          if [ -n "$changes" ]; then
+            echo "$changes"
+            echo "::error::styles/vendor is out of sync with its pin — run ./scripts/sync-design.sh and commit" >&2
+            exit 1
+          fi
+
+  update:
+    name: open a pull request for a newer release
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+      - name: Re-vendor at the latest release
+        id: sync
+        run: |
+          latest=$(npm view @cheeselord/design version)
+          pinned=$(tr -d ' \n' < styles/vendor/.design-version)
+          echo "latest=$latest" >> "$GITHUB_OUTPUT"
+          echo "pinned=$pinned" >> "$GITHUB_OUTPUT"
+          [ "$latest" = "$pinned" ] && { echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; }
+          ./scripts/sync-design.sh "$latest"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Open the pull request
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LATEST: ${{ steps.sync.outputs.latest }}
+          PINNED: ${{ steps.sync.outputs.pinned }}
+        run: |
+          branch="design-sync/$LATEST"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -A
+          git commit -m "chore(design): vendor @cheeselord/design $LATEST" \
+            -m "Re-vendored from $PINNED by scripts/sync-design.sh."
+          git push -u origin "$branch"
+          gh pr create --fill --head "$branch" \
+            --title "chore(design): vendor @cheeselord/design $LATEST" \
+            --body "\`scripts/sync-design.sh $LATEST\` re-vendored \`styles/vendor/\` from $PINNED. Review the stylesheet diff for anything that changes how this page renders, then merge."
