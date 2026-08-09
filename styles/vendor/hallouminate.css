@@ -1,0 +1,8 @@
+@import "./easy-cheese.css";
+@import "./flavors/hallouminate.css";
+
+/* halloumi is cut clean: no wonk */
+main h1 { font-variation-settings: "SOFT" 0, "WONK" 0; }
+
+/* grill marks instead of the cellar glow: faint vertical sear lines */
+body { background: repeating-linear-gradient(90deg, light-dark(oklch(from var(--cl-ink) l c h / 4%), oklch(from var(--cl-amber) l c h / 4%)) 0 2px, transparent 2px 16px), var(--sl-color-black); }
