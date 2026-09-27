@@ -22,21 +22,18 @@
 </head>
 <body>
 <header>
-  <div class="wrap"><a class="brand" href="/">cheeselord<b>.dev</b></a></div>
+  <div class="wrap">
+    <a class="brand" href="/">cheeselord<b>.dev</b></a>
+    <nav class="top" aria-label="Site"><a href="#cellar">projects</a><a href="https://github.com/paulnsorensen">github</a></nav>
+  </div>
 </header>
 <main>
-  <div class="wrap">
+
+  <section class="wrap hero">
     <div>
       <p class="eyebrow">The cellar is open</p>
       <h1>The <em>cheese</em> must flow.</h1>
-      <nav class="cellar" aria-label="Projects">
-        <div class="cellar-head">~/cellar · 5 wheels</div>
-        <a href="/easy-cheese"><strong>easy-cheese</strong> <span>cheese your code</span> <i aria-hidden="true">→</i></a>
-        <a href="/hallouminate"><strong>hallouminate</strong> <span>grounding CLI</span> <i aria-hidden="true">→</i></a>
-        <a href="https://github.com/paulnsorensen/milknado"><strong>milknado</strong> <span>mikado method, ralphified</span> <i aria-hidden="true">→</i></a>
-        <a href="https://github.com/paulnsorensen/skillz-that-grillz"><strong>skillz-that-grillz</strong> <span>skill repo</span> <i aria-hidden="true">→</i></a>
-        <a href="https://github.com/paulnsorensen/dotfiles"><strong>dotfiles</strong> <span>the whole rig</span> <i aria-hidden="true">→</i></a>
-      </nav>
+      <p class="lede">Tools for people who work with coding agents.</p>
     </div>
     <div class="ember-box">
       <video class="ember" width="320" height="320" autoplay muted loop playsinline
@@ -45,6 +42,52 @@
         <source src="cheeselord.mp4" type="video/mp4">
       </video>
     </div>
+  </section>
+
+  <div class="wrap shelf" id="cellar">
+
+    <article class="wheel-row">
+      <figure class="shot">
+        <img src="assets/shots/easy-cheese.png" alt="" onerror="this.parentNode.classList.add('empty')">
+        <span class="ph">easy-cheese.png</span>
+      </figure>
+      <div class="about">
+        <span class="name">easy-cheese <i>cheese your code</i></span>
+        <h2>Idea in. Reviewed pull request out.</h2>
+        <p class="go"><a href="/easy-cheese">docs</a><a href="https://github.com/paulnsorensen/easy-cheese">github</a></p>
+      </div>
+    </article>
+
+    <article class="wheel-row">
+      <figure class="shot">
+        <img src="assets/shots/hallouminate.png" alt="" onerror="this.parentNode.classList.add('empty')">
+        <span class="ph">hallouminate.png</span>
+      </figure>
+      <div class="about">
+        <span class="name">hallouminate <i>grounding CLI</i></span>
+        <h2>A wiki your agent writes, then searches.</h2>
+        <p class="go"><a href="/hallouminate">docs</a><a href="https://github.com/paulnsorensen/hallouminate">github</a></p>
+      </div>
+    </article>
+
+    <article class="wheel-row">
+      <figure class="shot">
+        <img src="assets/shots/milknado.png" alt="" onerror="this.parentNode.classList.add('empty')">
+        <span class="ph">milknado.png</span>
+      </figure>
+      <div class="about">
+        <span class="name">milknado <i>mikado method, ralphified</i></span>
+        <h2>Big refactors, one prerequisite at a time.</h2>
+        <p class="go"><a href="https://github.com/paulnsorensen/milknado">github</a></p>
+      </div>
+    </article>
+
+    <nav class="cellar" aria-label="More projects">
+      <div class="cellar-head">~/cellar · also aging</div>
+      <a href="https://github.com/paulnsorensen/skillz-that-grillz"><strong>skillz-that-grillz</strong> <span>skill repo</span> <i aria-hidden="true">→</i></a>
+      <a href="https://github.com/paulnsorensen/dotfiles"><strong>dotfiles</strong> <span>the whole rig</span> <i aria-hidden="true">→</i></a>
+    </nav>
+
   </div>
 </main>
 <footer>
