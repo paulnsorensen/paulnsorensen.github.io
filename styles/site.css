@@ -139,17 +139,18 @@ main .stage {
 .tile.small:hover .line { color: var(--bone); }
 .tile.small .shot .ph { font-size: 0.55rem; letter-spacing: 0.12em; }
 
-/* the signature: Zapfino pre-rendered to an image asset so the one-font-pair
-   invariant holds without shipping a third face. Kept small and faint, warmed
-   toward the gold, and tilted the way a hand leaves it, not a logo. */
+/* the signature: Herr Von Muellerhoff pre-rendered to an image asset so the
+   one-font-pair invariant holds without shipping a third face. The alt text
+   carries the name for search; the image itself stays small and faint,
+   warmed toward the gold, and tilted the way a hand leaves it. */
 footer .wrap { align-items: center; }
 .signature {
-  block-size: 1.4rem;
+  block-size: 1.5rem;
   inline-size: auto;
-  margin-block: -0.3rem;
-  opacity: 0.28;
+  margin-block: -0.2rem;
+  opacity: 0.42;
   filter: sepia(0.6) saturate(1.4);
-  transform: rotate(-3deg) translateY(0.1rem);
+  transform: rotate(-2deg) translateY(0.05rem);
   transform-origin: left center;
   user-select: none;
 }
