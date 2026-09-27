@@ -12,9 +12,14 @@
   --flame: oklch(66% 0.17 60);
 }
 
-/* the page is a column so the footer sits at the bottom of a short viewport */
+/* the page is a column so the footer sits at the bottom of a short viewport.
+   The footer drops the package's top margin so the stage's own symmetric
+   padding is the only space between header and footer, and the stage's
+   contents center on the true midpoint between them. main clips sideways
+   so the altar's glow never widens a phone viewport. */
 body { display: flex; flex-direction: column; }
-main { flex: 1; display: flex; }
+main { flex: 1; display: flex; overflow-x: clip; }
+footer { margin-block-start: 0; }
 
 /* header: the package's brand, plus one quiet link */
 .top { color: var(--dim); text-decoration: none; }
@@ -29,9 +34,12 @@ main .stage {
   padding-block: 2.5rem;
 }
 
-/* the altar: the headline standing over the burning wheel */
+/* the altar: the headline standing over the burning wheel. It shrinks to its
+   widest line (the <br> in the h1 sets that line), so the wheel and its glow
+   center under the words, not under the empty half of the column. */
 .altar {
   position: relative;
+  justify-self: start;
   display: grid;
   align-content: center;
   gap: 0.5rem;
@@ -58,7 +66,7 @@ main .stage {
 }
 .ember-box { display: grid; place-items: center; margin-block-start: -1.5rem; }
 .ember {
-  inline-size: min(28rem, 100%);
+  inline-size: min(22.4rem, 100%);
   height: auto;
   display: block;
   user-select: none;
@@ -155,11 +163,13 @@ footer .wrap { align-items: center; }
   user-select: none;
 }
 
+/* narrow: one column, the altar over the shelf, both centered. The stage rule
+   above outranks the package's own one-column breakpoint, so restate it here. */
 @media (max-width: 56rem) {
-  main .stage { padding-block: 2rem; }
-  .altar { text-align: center; }
+  main .stage { grid-template-columns: 1fr; padding-block: 2rem; }
+  .altar { justify-self: center; text-align: center; }
   .ember-box { margin-block-start: -0.5rem; }
-  .ember { inline-size: min(18rem, 80%); }
+  .ember { inline-size: min(14.4rem, 64%); }
 }
 @media (max-width: 30rem) {
   .tile { grid-template-columns: 1fr; gap: 0.8rem; }
