@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "IBM Plex Mono"; font-weight: 400; src: url("../../fonts/ibm-plex-mono-latin.woff2") format("woff2"); }
+  html, body { margin: 0; background: #131612; }
+  svg { display: block; }
+  text { font-family: "IBM Plex Mono", monospace; }
+</style>
+</head>
+<body>
+<!-- hallouminate tile image, 1440x1080. The README's `ground` query runs
+     along the local index and lights the one wiki page that answers it. The
+     rune on the lit page is the one on hallouminate's favicon cheese.
+     Palette and limits from AGENTS.md. -->
+<svg width="1440" height="1080" viewBox="0 0 1440 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dots" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="18" r="2" fill="#d7e6db" fill-opacity="0.06"/>
+    </pattern>
+    <radialGradient id="flame" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#db7300" stop-opacity="0.34"/>
+      <stop offset="0.55" stop-color="#db7300" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#db7300" stop-opacity="0"/>
+    </radialGradient>
+    <!-- a dim wiki page: a heading bar and five lines of text -->
+    <g id="page">
+      <rect width="200" height="280" rx="12" fill="#131612" stroke="#7a877e" stroke-opacity="0.6" stroke-width="8"/>
+      <rect x="28" y="34" width="112" height="20" rx="4" fill="#7a877e" fill-opacity="0.7"/>
+      <g fill="#7a877e" fill-opacity="0.35">
+        <rect x="28" y="92" width="144" height="12" rx="4"/>
+        <rect x="28" y="128" width="120" height="12" rx="4"/>
+        <rect x="28" y="164" width="144" height="12" rx="4"/>
+        <rect x="28" y="200" width="92" height="12" rx="4"/>
+        <rect x="28" y="236" width="132" height="12" rx="4"/>
+      </g>
+    </g>
+  </defs>
+
+  <rect width="1440" height="1080" fill="#131612"/>
+  <rect width="1440" height="1080" fill="url(#dots)"/>
+
+  <!-- the prompt: the only words -->
+  <text x="132" y="268" font-size="112" fill="#7a877e">›</text>
+  <text x="236" y="268" font-size="112" fill="#d7e6db">ground "why?"</text>
+  <rect x="1110" y="178" width="58" height="104" fill="#7a877e" fill-opacity="0.55"/>
+
+  <!-- the local index: a rail under the wiki, one stub per page -->
+  <path d="M 196 330 V 850" stroke="#7a877e" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M 196 850 H 1140" stroke="#7a877e" stroke-opacity="0.42" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <g stroke="#7a877e" stroke-opacity="0.42" stroke-width="8" stroke-linecap="round">
+    <path d="M 390 734 V 850"/>
+    <path d="M 640 734 V 850"/>
+    <path d="M 1140 734 V 850"/>
+  </g>
+  <!-- the query's path: router, along the rail, up into the answer -->
+  <path d="M 196 850 H 890 V 714" stroke="#d7e6db" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#131612" stroke="#7a877e" stroke-opacity="0.6" stroke-width="8">
+    <circle cx="390" cy="850" r="16"/>
+    <circle cx="640" cy="850" r="16"/>
+    <circle cx="1140" cy="850" r="16"/>
+  </g>
+  <circle cx="890" cy="850" r="16" fill="#d7e6db"/>
+
+  <!-- the wiki -->
+  <use href="#page" x="290" y="450"/>
+  <use href="#page" x="540" y="450"/>
+  <use href="#page" x="1040" y="450"/>
+
+  <!-- the router -->
+  <circle cx="196" cy="850" r="46" fill="#131612" stroke="#d7e6db" stroke-width="12"/>
+  <circle cx="196" cy="850" r="14" fill="#d7e6db"/>
+
+  <!-- the answer: the one lit page, the one gold thing, raised off the shelf -->
+  <circle cx="890" cy="570" r="270" fill="url(#flame)"/>
+  <g transform="translate(790 410)">
+    <rect width="200" height="300" rx="12" fill="#f1c035" stroke="#131612" stroke-width="8"/>
+    <rect x="28" y="34" width="112" height="20" rx="4" fill="#131612"/>
+    <rect x="28" y="82" width="144" height="12" rx="4" fill="#131612" fill-opacity="0.55"/>
+    <rect x="28" y="116" width="104" height="12" rx="4" fill="#131612" fill-opacity="0.55"/>
+    <!-- the favicon's rune -->
+    <path d="M 84 160 L 122 206 L 80 222 L 118 268" stroke="#131612" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
+</body>
+</html>

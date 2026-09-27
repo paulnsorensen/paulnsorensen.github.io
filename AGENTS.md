@@ -7,7 +7,7 @@ This repository is the static homepage for cheeselord.dev. It has no build step.
 - `index.html` is the only page.
 - `styles/vendor/` holds `@cheeselord/design`. `scripts/sync-design.sh` vendors it at a pinned version. Do not edit files in `styles/vendor/`.
 - `styles/site.css` holds only the styles that are unique to this page.
-- `assets/shots/<name>.png` holds the project tile images.
+- `assets/shots/<name>.png` holds the project tile images. `assets/shots/src/<name>.html` holds the SVG source of each image.
 
 ## Checks
 
@@ -36,6 +36,8 @@ The page crops each image to a 4:3 slot with `object-fit: cover`. A 1 px border 
 - Keep the important content in the center 90% of the image.
 - For a placeholder image, use a flat `#131612` fill at the same size.
 - Name each file `assets/shots/<project>.png`. The project name is the tile's `.name` text.
+- To render an image, run `node scripts/render-shot.mjs assets/shots/src/<name>.html assets/shots/<name>.png 1440 1080`. The script uses the local Google Chrome in headless mode. The output is byte-identical for the same source.
+- Each image follows one visual pattern: a `›` prompt at the top, a grey diagram, and one gold focal element with an orange glow behind it.
 
 ### Text in the image
 
