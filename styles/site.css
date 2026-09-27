@@ -119,18 +119,25 @@ main .stage {
 .shot.empty img { display: none; }
 .shot.empty .ph { display: grid; }
 
-/* the rest of the cellar, on one line */
+/* the rest of the cellar: the same row, at half size and half the voice */
 .also {
-  display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.5rem;
   margin-block-start: 1.4rem;
-  padding-block-start: 1.1rem;
   border-block-start: 1px solid var(--hairline);
-  font-size: 0.8rem;
 }
-.also span { color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; font-size: 0.7rem; align-self: center; }
-.also a { color: var(--bone); text-decoration: none; }
-.also a:hover { color: var(--gold); }
-.also a::after { content: " →"; color: var(--dim); }
+.tile.small {
+  grid-template-columns: 5rem 1fr;
+  gap: 0.9rem;
+  padding-block: 1.1rem 0;
+  border-block-start: 0;
+}
+.tile.small .about { gap: 0.2rem; }
+.tile.small .name { font-size: 0.74rem; }
+.tile.small .line { font-size: 0.74rem; line-height: 1.45; color: var(--dim); }
+.tile.small:hover .line { color: var(--bone); }
+.tile.small .shot .ph { font-size: 0.55rem; letter-spacing: 0.12em; }
 
 /* the signature: Zapfino pre-rendered to an image asset so the one-font-pair
    invariant holds without shipping a third face */
@@ -151,4 +158,6 @@ main .stage {
 }
 @media (max-width: 30rem) {
   .tile { grid-template-columns: 1fr; gap: 0.8rem; }
+  .also { grid-template-columns: 1fr; }
+  .tile.small { grid-template-columns: 5rem 1fr; }
 }
