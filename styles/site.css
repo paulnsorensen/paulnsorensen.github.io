@@ -140,13 +140,17 @@ main .stage {
 .tile.small .shot .ph { font-size: 0.55rem; letter-spacing: 0.12em; }
 
 /* the signature: Zapfino pre-rendered to an image asset so the one-font-pair
-   invariant holds without shipping a third face */
+   invariant holds without shipping a third face. Kept small and faint, warmed
+   toward the gold, and tilted the way a hand leaves it, not a logo. */
+footer .wrap { align-items: center; }
 .signature {
-  block-size: 2.1rem;
+  block-size: 1.4rem;
   inline-size: auto;
-  margin-block: -0.4rem;
-  opacity: 0.36;
-  transform: rotate(-1deg);
+  margin-block: -0.3rem;
+  opacity: 0.28;
+  filter: sepia(0.6) saturate(1.4);
+  transform: rotate(-3deg) translateY(0.1rem);
+  transform-origin: left center;
   user-select: none;
 }
 
