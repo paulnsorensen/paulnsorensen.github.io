@@ -1,39 +1,178 @@
 /* cheeselord.dev — what is unique to this page, and nothing else.
    The shell, the fonts, the cellar flavor, and the header all come from
    @cheeselord/design, vendored under styles/vendor/ by scripts/sync-design.sh
-   and loaded ahead of this file. Everything that used to be copied here — the
-   token block, the fleck field, the type scale, the cellar listing — now moves
-   when the package moves. */
+   and loaded ahead of this file. */
 
-/* the page is a column so the footer sits at the bottom of a short viewport */
+/* The accent takes its color from the ember itself: the loop burns at
+   #f0c048 / #f0d860 with #c07818 in the shadows, so the page's gold moves
+   from the package's aged amber to the flame's own yellow, and the ember's
+   glow is orange. The cellar green underneath stays as the package set it. */
+:root {
+  --cl-amber: oklch(83% 0.155 88);
+  --flame: oklch(66% 0.17 60);
+}
+
+/* the page is a column so the footer sits at the bottom of a short viewport.
+   The footer drops the package's top margin so the stage's own symmetric
+   padding is the only space between header and footer, and the stage's
+   contents center on the true midpoint between them. main clips sideways
+   so the altar's glow never widens a phone viewport. */
 body { display: flex; flex-direction: column; }
-main { flex: 1; }
+main { flex: 1; display: flex; overflow-x: clip; }
+footer { margin-block-start: 0; }
 
-/* the hero artifact: the Cheese Lord burning on his sigil, feathered into the
-   cellar dark. Stands where the package's dot-matrix wheel would be. */
-.ember-box { display: grid; place-items: center; }
+/* header: the package's brand, plus one quiet link */
+.top { color: var(--dim); text-decoration: none; }
+.top:hover { color: var(--gold); }
+
+/* the stage: altar on the left, shelf on the right, filling the viewport.
+   Overrides the package's main .wrap grid, which is sized for its own hero. */
+main .stage {
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: stretch;
+  padding-block: 2.5rem;
+}
+
+/* the altar: the headline standing over the burning wheel. It shrinks to its
+   widest line (the <br> in the h1 sets that line), so the wheel and its glow
+   center under the words, not under the empty half of the column. */
+.altar {
+  position: relative;
+  justify-self: start;
+  display: grid;
+  align-content: center;
+  gap: 0.5rem;
+  padding-block: 1rem;
+}
+.altar::before {
+  /* the fire's own light on the cellar wall */
+  content: "";
+  position: absolute;
+  inset: -10% -20%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 45% 40% at 50% 68%, oklch(from var(--flame) l c h / 24%), transparent 70%),
+    radial-gradient(ellipse 30% 25% at 50% 72%, oklch(from var(--gold) l c h / 14%), transparent 70%);
+}
+.altar h1 { margin-block: 0; position: relative; z-index: 1; }
+.altar h1 em {
+  /* the word burns like the wheel: pale yellow at the top, ember at the base */
+  background: linear-gradient(180deg, oklch(from var(--gold) 92% 0.14 95) 0%, var(--gold) 55%, var(--flame) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.ember-box { display: grid; place-items: center; margin-block-start: -1.5rem; }
 .ember {
-  inline-size: min(24rem, 90%);
+  inline-size: min(22.4rem, 100%);
   height: auto;
   display: block;
   user-select: none;
-  -webkit-mask: radial-gradient(ellipse closest-side, #000 62%, transparent 97%);
-  mask: radial-gradient(ellipse closest-side, #000 62%, transparent 97%);
-  filter: drop-shadow(0 0 3.5rem oklch(from var(--gold) l c h / 18%));
+  -webkit-mask: radial-gradient(ellipse closest-side, #000 60%, transparent 97%);
+  mask: radial-gradient(ellipse closest-side, #000 60%, transparent 97%);
+  filter: drop-shadow(0 0 4rem oklch(from var(--flame) l c h / 30%));
 }
 
-/* the signature: Zapfino pre-rendered to an image asset so the one-font-pair
-   invariant holds without shipping a third face */
+/* the shelf: the wheels stacked, each one link — thumbnail, name, one line */
+.shelf { display: grid; align-content: center; }
+.tile {
+  display: grid;
+  grid-template-columns: minmax(8rem, 10.5rem) 1fr;
+  gap: 1.3rem;
+  align-items: center;
+  padding-block: 1.4rem;
+  color: var(--bone);
+  text-decoration: none;
+  border-block-start: 1px solid var(--hairline);
+}
+.tile:first-child { border-block-start: 0; padding-block-start: 0; }
+.about { display: grid; gap: 0.45rem; }
+.name { font-size: 0.78rem; letter-spacing: 0.02em; color: var(--gold); }
+.tile h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  font-weight: 560;
+  font-size: clamp(1.3rem, 1.8vw, 1.55rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.tile:hover h2 { color: var(--gold); }
+
+/* the screenshot slot: assets/shots/<wheel>.png when it exists, a marked
+   panel until then */
+.shot {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  border: 1px solid var(--hairline);
+  background: var(--panel);
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.tile:hover .shot { border-color: var(--gold); }
+.shot img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.shot .ph {
+  position: absolute; inset: 0;
+  display: none;
+  place-items: center;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: radial-gradient(circle 1px, oklch(from var(--bone) l c h / 9%) 98%, transparent) 0 0 / 12px 12px;
+}
+.shot.empty img { display: none; }
+.shot.empty .ph { display: grid; }
+
+/* the rest of the cellar: the same row, at half size and half the voice */
+.also {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.5rem;
+  margin-block-start: 1.4rem;
+  border-block-start: 1px solid var(--hairline);
+}
+.tile.small {
+  grid-template-columns: 5rem 1fr;
+  gap: 0.9rem;
+  padding-block: 1.1rem 0;
+  border-block-start: 0;
+}
+.tile.small .about { gap: 0.2rem; }
+.tile.small .name { font-size: 0.74rem; }
+.tile.small .line { font-size: 0.74rem; line-height: 1.45; color: var(--dim); }
+.tile.small:hover .line { color: var(--bone); }
+.tile.small .shot .ph { font-size: 0.55rem; letter-spacing: 0.12em; }
+
+/* the signature: Herr Von Muellerhoff pre-rendered to an image asset so the
+   one-font-pair invariant holds without shipping a third face. The alt text
+   carries the name for search; the image itself stays small and faint,
+   warmed toward the gold, and tilted the way a hand leaves it. */
+footer .wrap { align-items: center; }
 .signature {
-  block-size: 2.1rem;
+  block-size: 1.5rem;
   inline-size: auto;
-  margin-block: -0.4rem;
-  opacity: 0.36;
-  transform: rotate(-1deg);
+  margin-block: -0.2rem;
+  opacity: 0.42;
+  filter: sepia(0.6) saturate(1.4);
+  transform: rotate(-2deg) translateY(0.05rem);
+  transform-origin: left center;
   user-select: none;
 }
 
+/* narrow: one column, the altar over the shelf, both centered. The stage rule
+   above outranks the package's own one-column breakpoint, so restate it here. */
 @media (max-width: 56rem) {
-  .ember-box { order: -1; }
-  .ember { inline-size: min(15rem, 70%); }
+  main .stage { grid-template-columns: 1fr; padding-block: 2rem; }
+  .altar { justify-self: center; text-align: center; }
+  .ember-box { margin-block-start: -0.5rem; }
+  .ember { inline-size: min(14.4rem, 64%); }
+}
+@media (max-width: 30rem) {
+  .tile { grid-template-columns: 1fr; gap: 0.8rem; }
+  .also { grid-template-columns: 1fr; }
+  .tile.small { grid-template-columns: 5rem 1fr; }
 }

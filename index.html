@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>🧀</title>
-  <link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="description" content="Paul Sorensen — projects">
   <meta name="theme-color" content="#0b0e0c">
@@ -22,33 +22,84 @@
 </head>
 <body>
 <header>
-  <div class="wrap"><a class="brand" href="/">cheeselord<b>.dev</b></a></div>
+  <div class="wrap">
+    <a class="brand" href="/">cheeselord<b>.dev</b></a>
+    <a class="top" href="https://github.com/paulnsorensen">github</a>
+  </div>
 </header>
 <main>
-  <div class="wrap">
-    <div>
-      <p class="eyebrow">The cellar is open</p>
-      <h1>The <em>cheese</em> must flow.</h1>
-      <nav class="cellar" aria-label="Projects">
-        <div class="cellar-head">~/cellar · 5 wheels</div>
-        <a href="/easy-cheese"><strong>easy-cheese</strong> <span>cheese your code</span> <i aria-hidden="true">→</i></a>
-        <a href="/hallouminate"><strong>hallouminate</strong> <span>grounding CLI</span> <i aria-hidden="true">→</i></a>
-        <a href="https://github.com/paulnsorensen/milknado"><strong>milknado</strong> <span>mikado method, ralphified</span> <i aria-hidden="true">→</i></a>
-        <a href="https://github.com/paulnsorensen/skillz-that-grillz"><strong>skillz-that-grillz</strong> <span>skill repo</span> <i aria-hidden="true">→</i></a>
-        <a href="https://github.com/paulnsorensen/dotfiles"><strong>dotfiles</strong> <span>the whole rig</span> <i aria-hidden="true">→</i></a>
-      </nav>
-    </div>
-    <div class="ember-box">
-      <video class="ember" width="320" height="320" autoplay muted loop playsinline
-             poster="cheeselord-still.jpg" role="img" aria-label="The Cheese Lord: a block of cheese burning atop a runic sigil">
-        <source src="cheeselord.webm" type="video/webm">
-        <source src="cheeselord.mp4" type="video/mp4">
-      </video>
-    </div>
+  <div class="wrap stage">
+
+    <section class="altar" aria-label="Intro">
+      <h1>The <em>cheese</em><br> must flow.</h1>
+      <div class="ember-box">
+        <video class="ember" width="320" height="320" autoplay muted loop playsinline
+               poster="cheeselord-still.jpg" role="img" aria-label="The Cheese Lord: a block of cheese burning atop a runic sigil">
+          <source src="cheeselord.webm" type="video/webm">
+          <source src="cheeselord.mp4" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <section class="shelf" aria-label="Projects">
+      <a class="tile" href="/easy-cheese">
+        <figure class="shot">
+          <img src="assets/shots/easy-cheese.png" alt="" onerror="this.parentNode.classList.add('empty')">
+          <span class="ph">easy-cheese.png</span>
+        </figure>
+        <span class="about">
+          <span class="name">easy-cheese</span>
+          <h2>Agent Skills for any coding agent.</h2>
+        </span>
+      </a>
+      <a class="tile" href="/hallouminate">
+        <figure class="shot">
+          <img src="assets/shots/hallouminate.png" alt="" onerror="this.parentNode.classList.add('empty')">
+          <span class="ph">hallouminate.png</span>
+        </figure>
+        <span class="about">
+          <span class="name">hallouminate</span>
+          <h2>A wiki your agent writes, then searches.</h2>
+        </span>
+      </a>
+      <a class="tile" href="https://github.com/paulnsorensen/milknado">
+        <figure class="shot">
+          <img src="assets/shots/milknado.png" alt="" onerror="this.parentNode.classList.add('empty')">
+          <span class="ph">milknado.png</span>
+        </figure>
+        <span class="about">
+          <span class="name">milknado</span>
+          <h2>Big refactors, one prerequisite at a time.</h2>
+        </span>
+      </a>
+      <div class="also" aria-label="Also aging">
+        <a class="tile small" href="https://github.com/paulnsorensen/skillz-that-grillz">
+          <figure class="shot">
+            <img src="assets/shots/skillz-that-grillz.png" alt="" onerror="this.parentNode.classList.add('empty')">
+            <span class="ph">png</span>
+          </figure>
+          <span class="about">
+            <span class="name">skillz-that-grillz</span>
+            <span class="line">Reusable Agent Skills, installable anywhere.</span>
+          </span>
+        </a>
+        <a class="tile small" href="https://github.com/paulnsorensen/dotfiles">
+          <figure class="shot">
+            <img src="assets/shots/dotfiles.png" alt="" onerror="this.parentNode.classList.add('empty')">
+            <span class="ph">png</span>
+          </figure>
+          <span class="about">
+            <span class="name">dotfiles</span>
+            <span class="line">Shell, editor and agent config, versioned.</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
   </div>
 </main>
 <footer>
-  <div class="wrap"><span>milk in, wheels out 🧀</span><img class="signature" src="assets/signature.png" alt="" width="343" height="77"></div>
+  <div class="wrap"><span>milk in, wheels out 🧀</span><img class="signature" src="assets/signature.png" alt="Paul Sorensen" width="871" height="212"></div>
 </footer>
 <script>
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
