@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "IBM Plex Mono"; font-weight: 400; src: url("../../fonts/ibm-plex-mono-latin.woff2") format("woff2"); }
+  html, body { margin: 0; background: #131612; }
+  svg { display: block; }
+  text { font-family: "IBM Plex Mono", monospace; }
+</style>
+</head>
+<body>
+<!-- milknado tile image, 1440x1080. The Mikado graph from milknado's web UI,
+     redrawn: a goal on top, prerequisites under it, finished leaves checked
+     off, and `milknado run` working the one ready leaf. Palette and limits
+     from AGENTS.md. -->
+<svg width="1440" height="1080" viewBox="0 0 1440 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dots" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="18" r="2" fill="#d7e6db" fill-opacity="0.06"/>
+    </pattern>
+    <radialGradient id="flame" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#db7300" stop-opacity="0.34"/>
+      <stop offset="0.55" stop-color="#db7300" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#db7300" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1440" height="1080" fill="#131612"/>
+  <rect width="1440" height="1080" fill="url(#dots)"/>
+
+  <!-- the prompt: the only words -->
+  <text x="132" y="268" font-size="112" fill="#7a877e">›</text>
+  <text x="236" y="268" font-size="112" fill="#d7e6db">milknado run</text>
+  <rect x="1046" y="178" width="58" height="104" fill="#7a877e" fill-opacity="0.55"/>
+
+  <!-- graph edges: down from the parent, across, down into the child -->
+  <g stroke="#7a877e" stroke-opacity="0.42" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 800 478 V 560"/>
+    <path d="M 520 560 V 520 H 1080 V 560"/>
+    <path d="M 520 624 V 672"/>
+    <path d="M 440 720 V 672 H 600 V 720"/>
+    <path d="M 800 624 V 720"/>
+    <path d="M 1080 624 V 672"/>
+    <path d="M 1000 720 V 672 H 1160 V 720"/>
+  </g>
+
+  <!-- the run: prompt, down the left, along the floor, up into the ready leaf -->
+  <path d="M 196 330 V 880 H 800 V 776" stroke="#d7e6db" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="196" cy="880" r="46" fill="#131612" stroke="#d7e6db" stroke-width="12"/>
+  <circle cx="196" cy="880" r="14" fill="#d7e6db"/>
+
+  <!-- pending nodes: hollow pill, hollow status ring, dim label bar -->
+  <g fill="#131612" stroke="#7a877e" stroke-opacity="0.6" stroke-width="8">
+    <rect x="690" y="402" width="220" height="76" rx="38"/>
+    <rect x="710" y="560" width="180" height="64" rx="32"/>
+    <rect x="990" y="560" width="180" height="64" rx="32"/>
+    <rect x="930" y="720" width="140" height="56" rx="28"/>
+    <rect x="1090" y="720" width="140" height="56" rx="28"/>
+    <circle cx="730" cy="440" r="12"/>
+    <circle cx="746" cy="592" r="11"/>
+    <circle cx="1026" cy="592" r="11"/>
+    <circle cx="962" cy="748" r="10"/>
+    <circle cx="1122" cy="748" r="10"/>
+  </g>
+  <g fill="#7a877e" fill-opacity="0.55">
+    <rect x="758" y="430" width="124" height="20" rx="6"/>
+    <rect x="770" y="584" width="96" height="16" rx="5"/>
+    <rect x="1050" y="584" width="96" height="16" rx="5"/>
+    <rect x="984" y="741" width="66" height="14" rx="5"/>
+    <rect x="1144" y="741" width="66" height="14" rx="5"/>
+  </g>
+
+  <!-- done nodes: filled pill, bone check, dim label bar -->
+  <g fill="#323832" stroke="#7a877e" stroke-opacity="0.6" stroke-width="8">
+    <rect x="430" y="560" width="180" height="64" rx="32"/>
+    <rect x="370" y="720" width="140" height="56" rx="28"/>
+    <rect x="530" y="720" width="140" height="56" rx="28"/>
+  </g>
+  <g stroke="#d7e6db" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 456 592 L 464 600 L 478 584"/>
+    <path d="M 392 748 L 399 755 L 412 741"/>
+    <path d="M 552 748 L 559 755 L 572 741"/>
+  </g>
+  <g fill="#7a877e" fill-opacity="0.7">
+    <rect x="490" y="584" width="96" height="16" rx="5"/>
+    <rect x="424" y="741" width="66" height="14" rx="5"/>
+    <rect x="584" y="741" width="66" height="14" rx="5"/>
+  </g>
+
+  <!-- the ready leaf, running: the one gold thing -->
+  <circle cx="800" cy="748" r="240" fill="url(#flame)"/>
+  <rect x="722" y="714" width="156" height="68" rx="34" fill="#f1c035" stroke="#131612" stroke-width="8"/>
+  <circle cx="758" cy="748" r="13" fill="none" stroke="#131612" stroke-width="7"/>
+  <path d="M 758 735 A 13 13 0 0 1 758 761 Z" fill="#131612"/>
+  <rect x="784" y="740" width="70" height="16" rx="5" fill="#131612" fill-opacity="0.8"/>
+</svg>
+</body>
+</html>
