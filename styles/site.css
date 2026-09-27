@@ -7,20 +7,19 @@
 body { display: flex; flex-direction: column; }
 main { flex: 1; }
 
-/* header: the package's brand, plus two quiet links */
-.top { display: flex; gap: 1.4rem; }
-.top a { color: var(--dim); text-decoration: none; }
-.top a:hover { color: var(--gold); }
+/* header: the package's brand, plus one quiet link */
+.top { color: var(--dim); text-decoration: none; }
+.top:hover { color: var(--gold); }
 
-/* the hero keeps the package's two-column grid (main .wrap) and only tightens its bottom */
-.hero { padding-block-end: 2rem; }
-.lede { font-size: 0.95rem; }
+/* the hero keeps the package's two-column grid (main .wrap): headline, ember */
+.hero { padding-block: 4.5rem 3rem; }
+.hero h1 { margin-block: 0; }
 
 /* the hero artifact: the Cheese Lord burning on his sigil, feathered into the
    cellar dark. Stands where the package's dot-matrix wheel would be. */
 .ember-box { display: grid; place-items: center; }
 .ember {
-  inline-size: min(24rem, 90%);
+  inline-size: min(22rem, 90%);
   height: auto;
   display: block;
   user-select: none;
@@ -29,63 +28,65 @@ main { flex: 1; }
   filter: drop-shadow(0 0 3.5rem oklch(from var(--gold) l c h / 18%));
 }
 
-/* the shelf: one row per wheel, image first, one line of type, links.
+/* the shelf: three tiles side by side, each one link — image, name, one line.
    Overrides the package's main .wrap grid, which is sized for the hero. */
-main .shelf { display: block; padding-block: 0 2rem; }
-
-.wheel-row {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 3rem;
-  align-items: center;
-  padding-block: 3.5rem;
-  border-block-start: 1px solid var(--hairline);
+main .shelf {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  padding-block: 0;
 }
-.wheel-row:nth-child(even) .shot { order: 2; }
-
-.about { display: grid; gap: 1rem; }
-.name { font-size: 0.82rem; color: var(--gold); letter-spacing: 0.02em; }
-.name i { font-style: normal; color: var(--dim); margin-inline-start: 0.8ch; }
-.about h2 {
+.tile { display: grid; gap: 0.7rem; color: var(--bone); text-decoration: none; }
+.name { font-size: 0.78rem; letter-spacing: 0.02em; color: var(--gold); }
+.tile h2 {
   font-family: Fraunces, Georgia, serif;
   font-variation-settings: "SOFT" 0, "WONK" 1;
   font-weight: 560;
-  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  font-size: clamp(1.35rem, 1.9vw, 1.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
-.go { display: flex; gap: 1.4rem; font-size: 0.82rem; }
-.go a { color: var(--bone); text-decoration: none; border-block-end: 1px solid var(--hairline); padding-block-end: 1px; }
-.go a:hover { color: var(--gold); border-color: var(--gold); }
+.tile:hover h2 { color: var(--gold); }
 
 /* the screenshot slot: assets/shots/<wheel>.png when it exists, a marked
-   panel until then. The image sits in a panel with the package's hairline. */
+   panel until then */
 .shot {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   max-width: 100%;
   border: 1px solid var(--hairline);
   background: var(--panel);
   overflow: hidden;
+  transition: border-color 0.15s;
 }
+.tile:hover .shot { border-color: var(--gold); }
 .shot img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
 .shot .ph {
   position: absolute; inset: 0;
   display: none;
   place-items: center;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--dim);
-  background:
-    radial-gradient(circle 1px, oklch(from var(--bone) l c h / 9%) 98%, transparent) 0 0 / 14px 14px;
+  background: radial-gradient(circle 1px, oklch(from var(--bone) l c h / 9%) 98%, transparent) 0 0 / 14px 14px;
 }
 .shot.empty img { display: none; }
 .shot.empty .ph { display: grid; }
 
-/* the rest of the cellar reuses the package's listing, with a lighter top margin */
-.shelf .cellar { margin-block: 1rem 0; }
+/* the rest of the cellar, on one line */
+main .also {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem;
+  margin-block: 3rem 1rem;
+  padding-block-start: 1.1rem;
+  border-block-start: 1px solid var(--hairline);
+  font-size: 0.8rem;
+}
+.also span { color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; font-size: 0.7rem; align-self: center; }
+.also a { color: var(--bone); text-decoration: none; }
+.also a:hover { color: var(--gold); }
+.also a::after { content: " →"; color: var(--dim); }
 
 /* the signature: Zapfino pre-rendered to an image asset so the one-font-pair
    invariant holds without shipping a third face */
@@ -99,8 +100,8 @@ main .shelf { display: block; padding-block: 0 2rem; }
 }
 
 @media (max-width: 56rem) {
+  .hero { padding-block: 2.5rem 2rem; }
   .ember-box { order: -1; }
   .ember { inline-size: min(15rem, 70%); }
-  .wheel-row { grid-template-columns: 1fr; gap: 1.4rem; padding-block: 2.5rem; }
-  .wheel-row:nth-child(even) .shot { order: 0; }
+  main .shelf { grid-template-columns: 1fr; gap: 2.2rem; }
 }
